@@ -1,16 +1,25 @@
 __pycache__/
-*.pyc
+*.py[codz]
 *.pyo
 *.pyd
 .pytest_cache/
 .mypy_cache/
+.ruff_cache/
 .ipynb_checkpoints/
+
+.env
+.venv/
+venv/
+env/
+ENV/
 
 results/*
 !results/examples/
 !results/examples/**
+
 data/processed/
 data/annotations/patches*/
-*.joblib
 data/raw/*
 !data/raw/.gitkeep
+
+*.joblib
