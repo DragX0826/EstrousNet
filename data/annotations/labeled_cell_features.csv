@@ -1,0 +1,5 @@
+area,circularity,nucleus_score,mean_intensity,mean_saturation,cell_type
+340,0.71,0.08,152.3,38.2,Cornified epithelial cell
+45,0.95,0.41,96.5,21.4,Leukocyte
+180,0.82,0.29,128.1,30.6,Nucleated epithelial cell
+

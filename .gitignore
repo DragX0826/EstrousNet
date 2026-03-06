@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+
+results/*
+!results/examples/
+!results/examples/**
+data/processed/
+data/annotations/patches*/
+*.joblib
+data/raw/*
+!data/raw/.gitkeep

@@ -1,0 +1,5 @@
+image_id,x,y,cell_type,area,circularity,has_nucleus
+4-1 10x,132,88,cornified,340,0.71,0
+4-1 10x,221,102,leukocyte,45,0.95,1
+4-1 10x,310,120,epithelial,180,0.82,1
+

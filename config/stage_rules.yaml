@@ -1,0 +1,18 @@
+default_stage: Proestrus
+
+priority:
+  - Estrus
+  - Diestrus
+  - Metestrus
+
+stages:
+  Estrus:
+    cornified_ratio_min: 0.70
+    leukocyte_ratio_max: 0.20
+  Diestrus:
+    leukocyte_ratio_min: 0.60
+    epithelial_ratio_max: 0.30
+  Metestrus:
+    leukocyte_ratio_min: 0.30
+  Proestrus: {}
+
