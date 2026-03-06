@@ -21,5 +21,6 @@ data/processed/
 data/annotations/patches*/
 data/raw/*
 !data/raw/.gitkeep
+data/tmp_one/
 
 *.joblib
