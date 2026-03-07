@@ -19,8 +19,12 @@ results/*
 
 data/processed/
 data/annotations/patches*/
+data/annotations/*_smoke.csv
 data/raw/*
 !data/raw/.gitkeep
 data/tmp_one/
 
 *.joblib
+diag_*.jpg
+diag2_*.jpg
+*_pseudo_test.jpg

@@ -1,120 +1,43 @@
 # EstrousNet
 
-Automated estrous cycle stage detection from vaginal smear microscopy images.
+Automatic estrous stage inference from rat vaginal smear microscopy images.
 
-This repository is a **biomedical image analysis prototype** focused on:
+This repo is a **proof-of-concept biomedical pipeline**:
 
-- interpretable pipeline design
-- semi-automatic annotation workflow
-- reproducible experiment structure
+`microscopy image -> pseudo cell mask -> cell type counts -> ratio-based stage inference`
 
-## Pipeline
+## Current Baseline (v4 final)
 
-![EstrousNet Pipeline](results/examples/pipeline_diagram.png)
+- Images: `18`
+- Mode: `skip_unet` (Stage 1 pseudo-mask used directly)
+- Reliable detections: `15/18`
+- Insufficient detection: `3/18` (`4-3 10x`, `4-4 10x`, `4-9 10x`)
+- Stage distribution: `Proestrus 9`, `Metestrus 8`, `Estrus 1`, `Diestrus 0`
+- 10x/40x consistency: `3/9`
 
-Microscopy image -> cell segmentation -> feature extraction -> cell type classification -> stage inference
+Detailed table and limitation text:
+- [report/baseline_results_v4_final.md](report/baseline_results_v4_final.md)
 
-## Segmentation Example
-
-![Segmentation Example](results/examples/segmentation_example.png)
-
-## Cell Feature Distribution
-
-![Feature Distribution](results/examples/feature_distribution.png)
-
-## Dataset
-
-- 18 microscopy images from laboratory practice.
-- Current repository tracks pipeline code and example outputs.
-- Raw microscopy images may be excluded from version control depending on data-sharing constraints.
-
-## Annotation Workflow
-
-1. Generate candidate cells and patches:
+## Run (Recommended)
 
 ```bash
-python scripts/generate_cell_candidates.py --save_overlay
+python scripts/run_pseudolabel_bootstrap.py \
+  --img_dir data/raw \
+  --out_dir results/bootstrap_v4_final \
+  --skip_unet \
+  --area_min 500 \
+  --area_max 15000 \
+  --circularity_min 0.30
 ```
 
-2. Review and label:
+Outputs:
 
-```bash
-python scripts/review_cell_candidates.py
-```
+- `results/bootstrap_v4_final/overlays/`
+- `results/bootstrap_v4_final/per_image_stage_summary.csv`
+- `results/bootstrap_v4_final/cell_level_features.csv`
 
-3. Export training table:
+## Notes
 
-```bash
-python scripts/export_labeled_features.py
-```
-
-4. Train baseline classifier:
-
-```bash
-python scripts/train_cell_classifier.py --labeled_features_csv data/annotations/labeled_cell_features.csv
-```
-
-5. Run image-level inference:
-
-```bash
-python run_pipeline.py --input_dir data/raw --output_dir results --stage_rules config/stage_rules.yaml
-```
-
-## One-Command Run (PowerShell)
-
-Smoke:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File scripts/run_workflow.ps1 -Mode smoke -SaveOverlay
-```
-
-Full:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File scripts/run_workflow.ps1 -Mode full -SaveOverlay
-```
-
-## Current Baseline Status (2026-03-06)
-
-What this version achieved:
-
-- Built microscopy image analysis pipeline.
-- Completed semi-automatic annotation workflow.
-- Implemented cell-level feature extraction and rule-based stage inference.
-- Structured a reproducible research-style repository.
-
-Current limitations:
-
-- labeled cells only 3
-- classifier not yet meaningfully validated
-- stage prediction collapsed to `Proestrus`
-- more reviewed annotations are required for reliable evaluation
-
-Failure reasons (current baseline):
-
-- Too few labeled cells to train/validate a robust cell classifier.
-- Segmentation quality is unstable across magnification and background conditions.
-- Under-detection of leukocytes in some images biases stage rules.
-- With weak cell typing, ratio-based stage inference collapses to one class.
-
-Why development stops at this version:
-
-- The next meaningful step is large-scale manual annotation, which is time-intensive.
-- Without more labels, adding more models would increase complexity without reliable evidence.
-- This repository is intentionally finalized as a transparent, reproducible prototype baseline.
-
-Detailed baseline notes: [report/baseline_results.md](report/baseline_results.md)
-
-## Repository Structure
-
-```text
-e:/MLphoto
-├── config/
-├── data/
-├── analysis/
-├── notebooks/
-├── src/
-├── scripts/
-├── results/
-└── report/
-```
+- This is a pilot study baseline, not a final validated model.
+- No strong image-level ground truth set is included yet.
+- Main limitation is detection instability across magnification/contrast.

@@ -1,0 +1,19 @@
+image,ground_truth_stage,notes,predicted_stage_hint
+4-1 10x.jpg,,,Proestrus
+4-1 40x.jpg,,,Metestrus
+4-10 10x.jpg,,,Metestrus
+4-10 40x.jpg,,,Metestrus
+4-2 10x.jpg,,,Metestrus
+4-2 40x.jpg,,,Metestrus
+4-3 10x.jpg,,,Metestrus
+4-3 40x.jpg,,,Proestrus
+4-4 10x.jpg,,,Metestrus
+4-4 40x.jpg,,,Proestrus
+4-5 10x.jpg,,,Metestrus
+4-5 40x.jpg,,,Proestrus
+4-7 10x.jpg,,,Metestrus
+4-7 40x.jpg,,,Metestrus
+4-8 10x.jpg,,,Metestrus
+4-8 40x.jpg,,,Metestrus
+4-9 10x.jpg,,,Metestrus
+4-9 40x.jpg,,,Proestrus
